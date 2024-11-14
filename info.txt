@@ -1,0 +1,12 @@
+step 1:
+        open terminal
+        -> npm create vite
+            P_name : 
+            framework : React
+            variant : JavaScript
+
+        -> cd P_name
+        -> npm install
+        -> npm run dev
+
+
