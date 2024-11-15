@@ -17,3 +17,6 @@ step 2:
         Then identify the page and there component 
         Create page folder and there file component
 
+
+step 3:
+        Complete the connection between the components
