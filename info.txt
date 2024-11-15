@@ -9,4 +9,11 @@ step 1:
         -> npm install
         -> npm run dev
 
+        delete default file and folder
+
+
+step 2: 
+        Identify the requirement 
+        Then identify the page and there component 
+        Create page folder and there file component
 
