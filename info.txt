@@ -20,3 +20,9 @@ step 2:
 
 step 3:
         Complete the connection between the components
+
+step 4: 
+        Add bootstrap link and script in to the index.html
+        Also link the fort awasome 
+        collect the all resourse -> images or video  based on project
+        
