@@ -1,0 +1,27 @@
+.img{
+    width: 57rem;
+    margin: 0 auto;
+}
+
+#hero_header{
+    font-size: 2.75rem;
+    font-weight: 500;
+}
+
+#hero_p{
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+
+#hero_btn{
+    width: 15rem;
+    margin: 0 auto;
+    font-weight: 500;
+}
+
+
+#hero_btn:hover{
+    background-color: black;
+}
+
+

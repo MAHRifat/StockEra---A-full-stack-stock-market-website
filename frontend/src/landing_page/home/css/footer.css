@@ -1,0 +1,34 @@
+.footer{
+    background-color: #f5f6f8;
+}
+
+
+.footer_logo{
+    width: 9rem;
+}
+
+.para-1{
+    font-size: .79rem;
+}
+
+.social_logo:hover{
+    color: #3193e2;
+}
+
+.foot a{
+    display: block;
+    color: #666666;
+    margin-bottom: .3rem;
+    font-size: 1rem;
+}
+
+
+.foot a:hover{
+    color: #3193e2;
+}
+
+.last_foot a{
+    color: #666666;
+    font-size: .75rem;
+    margin-left: 2.5rem;
+}

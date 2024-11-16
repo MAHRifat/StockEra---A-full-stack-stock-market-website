@@ -1,0 +1,9 @@
+#account_btn{
+    width: 15rem;
+    margin: 0 auto;
+    font-weight: 500;
+}
+
+#account_btn:hover{
+    background-color: black;
+}

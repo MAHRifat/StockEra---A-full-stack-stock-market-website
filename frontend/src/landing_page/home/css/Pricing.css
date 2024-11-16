@@ -1,0 +1,11 @@
+.price{
+    border: 1px ;
+}
+
+.price_img{
+    width: 6rem;
+}
+
+.price_para{
+    font-size: .70rem;
+}

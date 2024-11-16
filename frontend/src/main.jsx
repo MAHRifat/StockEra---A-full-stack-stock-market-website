@@ -7,6 +7,5 @@ import PricingPage from './landing_page/pricing/PricingPage';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <HomePage />
-    <PricingPage/>
   </StrictMode>,
 )
