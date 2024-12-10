@@ -32,3 +32,18 @@
     font-size: .75rem;
     margin-left: 2.5rem;
 }
+
+.last_foot a:hover{
+    color: #3193e2;
+    text-decoration: underline;
+}
+
+
+.social_logo a{
+    color: #666666;
+    text-decoration: none;
+}
+
+.social_logo a:hover{
+    color: #3193e2;
+}

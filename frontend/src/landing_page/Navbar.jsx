@@ -1,5 +1,6 @@
 import React from 'react';
 import './home/css/navbar.css'
+import { Link } from 'react-router-dom';
 function Navbar() {
     return ( 
         
@@ -8,28 +9,28 @@ function Navbar() {
             style={{backgroundColor: "#FFF"}}
             >
                 <div class="container-fluid">
-                    <a href="navbar-brand ms-0 nav_a">
+                    <Link className='navbar-brand nav_a ms-2' to={"/"}>
                     <img className='nav_logo' src="/media/images/nav_logo.png" alt="" />
-                    </a>
+                    </Link>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse " id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item mx-3">
-                                <a class="nav-link nav_a " aria-current="page" href="#">Signup</a>
+                                <Link class="nav-link nav_a " aria-current="page" to={"/signup"}>Signup</Link>
                             </li>
                             <li class="nav-item mx-3">
-                                <a class="nav-link nav_a" href="#">About</a>
+                                <Link class="nav-link nav_a" to={"/about"}>About</Link>
                             </li>
                             <li class="nav-item mx-3">
-                                <a class="nav-link nav_a" href="#">Products</a>
+                                <Link class="nav-link nav_a" to={"/product"}>Products</Link>
                             </li>
                             <li class="nav-item mx-3">
-                                <a class="nav-link nav_a" href="#">Pricing</a>
+                                <Link class="nav-link nav_a" to={"/pricing"}>Pricing</Link>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link nav_a mx-3" href="#">Support</a>
+                                <Link class="nav-link nav_a mx-3" to={'/support'}>Support</Link>
                             </li>
                             
                         </ul>

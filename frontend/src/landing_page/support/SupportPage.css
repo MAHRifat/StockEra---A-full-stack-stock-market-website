@@ -1,0 +1,41 @@
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex: 1;
+}
+
+.Supportbg{
+    background-color: #387ed1;
+    color: white;
+}
+
+.supportIN{
+    height: 4rem;
+}
+
+.supportA{
+    color: white;
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 5px;
+    line-height: 2.5rem;
+    
+}
+
+.supportA:hover{
+    opacity: .75;
+}
+
+.supportA2{
+    color: white;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 5px;
+    line-height: 1.5rem;
+    font-size: .95rem;
+}
+
+.supportA2:hover{
+    opacity: .75;
+}

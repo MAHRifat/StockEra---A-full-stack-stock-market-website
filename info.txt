@@ -26,3 +26,12 @@ step 4:
         Also link the fort awasome 
         collect the all resourse -> images or video  based on project
         
+step 5: 
+        Design home page 
+        install -> npm i react-router-dom   
+        set router and route for all link tag 
+
+step 6: 
+        Design all the components
+
+        

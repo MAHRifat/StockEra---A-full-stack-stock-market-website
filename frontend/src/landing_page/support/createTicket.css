@@ -1,0 +1,10 @@
+.ticket a{
+    display: block;
+    font-size: .95rem;
+    color: rgba(13, 96, 211, 0.811);
+    line-height: 2.25rem;
+}
+
+.ticket a:hover{
+    color: black;
+}

@@ -1,16 +1,21 @@
 import React from 'react';
 import Hero from './Hero';
-import Brokerage from './Brokerage';
 import Navbar from '../Navbar';
 import Footer from '../Footer';
+import './css/PricingPage.css';
+import Table from './table';
+import AccountOpening from './AccountOpening';
+import OptionalServices from './OptionalServices';
 
 function PricingPage() {
     return ( 
         <>
-            <Navbar />
-            <Hero />
-            <Brokerage />
-            <Footer />
+            <body>
+                <Hero />
+                <Table/>
+                <AccountOpening/>
+                <OptionalServices/>
+            </body>
         </>
      );
 }

@@ -6,19 +6,19 @@ function Footer() {
         <div className="footer border-top p-3 text-center">
             <div className="row">
                 <div className="col-lg-3 col-md-3 col-sm-12">
-                    <img className='footer_logo mb-2' src="/media/images/footer_logo.png" alt="" />
+                    <a href="/"><img className='footer_logo mb-2' src="/media/images/footer_logo.png" alt="" /></a>
                     <p className='text-muted para-1 pt-3 mb-4'>
                     © 2010 - 2024, Zerodha Broking Ltd. <br />
                     All rights reserved.
                     </p>
                     <p className='social_logo d-inline-block '>
-                    <i class="fa fa-facebook-square " aria-hidden="true"></i> &nbsp;
+                    <a href=""><i class="fa fa-facebook-square " aria-hidden="true"></i></a> &nbsp;
                     </p>
                     <p className='social_logo d-inline-block px-4'>          
-                    <i class="fa fa-instagram " aria-hidden="true"></i> &nbsp;    
+                    <a href=""><i class="fa fa-instagram " aria-hidden="true"></i></a> &nbsp;    
                     </p>
                     <p className='social_logo d-inline-block'>
-                    <i class="fa fa-linkedin-square " aria-hidden="true"></i> &nbsp;
+                    <a href=""><i class="fa fa-linkedin-square " aria-hidden="true"></i></a> &nbsp;
                     </p>
                 </div>
                 <div className="col-lg-3 col-md-3 col-sm-12 mt-1">

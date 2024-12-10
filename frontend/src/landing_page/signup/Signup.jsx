@@ -5,9 +5,11 @@ import Navbar from '../Navbar';
 function Signup() {
     return ( 
         <>  
-            <Navbar />
-            <h1> Signup</h1>
-            <Footer />
+           
+            <body>
+                <h1> Signup</h1>
+            </body>
+           
         </>
      );
 }

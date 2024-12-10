@@ -3,16 +3,17 @@ import Navbar from '../Navbar';
 import Hero from './Hero';
 import CreateTicket from './CreateTicket';
 import Footer from '../Footer';
+import './SupportPage.css'
 
 function SupportPage() {
-    return ( 
+    return (
         <>
-            <Navbar />
-            <Hero />
-            <CreateTicket />
-            <Footer/>
+            <body>
+                <Hero />
+                <CreateTicket />
+            </body>
         </>
-     );
+    );
 }
 
 export default SupportPage;
