@@ -35,3 +35,15 @@ step 6:
         Design all the components
 
         
+step 7: 
+        start building dashboard in another folder
+                -> npm create vite
+                        P_name : 
+                        framework : React
+                        variant : JavaScript
+                -> cd P_name
+                -> npm install
+                -> npm run dev
+
+                delete default file and folder
+
