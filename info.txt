@@ -47,3 +47,20 @@ step 7:
 
                 delete default file and folder
 
+
+step 8: 
+        connect mongobd:
+                -> create organization 
+                -> create project
+                -> create cluster
+
+step 9: 
+        cereate backend folder then run:
+                -> npm init
+                -> remove the test and add:
+                        -> "start": "nodemon index.js"
+                -> run: npm i -D nodemon
+                -> install the importent npm packages:
+                        -> npm i express body-parser cors dotenv mongoose passport passport-local passport-local-mongoose
+                                -> use cors for connect with the folders
+                                -> use dotevn for hide database url or credantial
