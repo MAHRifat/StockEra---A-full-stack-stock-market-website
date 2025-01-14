@@ -64,3 +64,7 @@ step 9:
                         -> npm i express body-parser cors dotenv mongoose passport passport-local passport-local-mongoose
                                 -> use cors for connect with the folders
                                 -> use dotevn for hide database url or credantial
+step 10: 
+        connect mongobd:
+                -> create .env file
+                
