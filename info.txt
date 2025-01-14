@@ -67,4 +67,6 @@ step 9:
 step 10: 
         connect mongobd:
                 -> create .env file
-                
+
+step 11: 
+        create schemas and models
