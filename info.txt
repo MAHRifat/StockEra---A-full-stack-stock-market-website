@@ -70,3 +70,7 @@ step 10:
 
 step 11: 
         create schemas and models
+step 12: 
+        Fetch the data from database to dashboard
+                -> Install axios which help us to connect with the api
+                        -> npm i axios

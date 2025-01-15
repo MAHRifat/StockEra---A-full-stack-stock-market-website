@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
-// import axios, { all } from "axios";
+import axios, { all } from "axios";
 
 
-import { holdings } from "../data/data";
+// import { holdings } from "../data/data";
 
 const Holdings = () => {
   const [allHoldings, setAllHoldings] = useState([]);
 
-  // useEffect(() => {
-  //   axios.get("http://localhost:3002/allHoldings").then((res) => {
-  //     // console.log(res.data);
-  //     setAllHoldings(res.data);
-  //   });
-  // }, []);
+  useEffect(() => {
+    axios.get("http://localhost:3002/allHoldings").then((res) => {
+      // console.log(res.data);
+      setAllHoldings(res.data);
+    });
+  }, []);
 
   // // const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   // const labels = allHoldings.map((subArray) => subArray["name"]);
@@ -46,7 +46,7 @@ const Holdings = () => {
 
   return (
     <>
-      <h3 className="title">Holdings ({holdings.length})</h3>
+      <h3 className="title">Holdings ({allHoldings.length})</h3>
 
       <div className="order-table">
         <table>
@@ -61,7 +61,7 @@ const Holdings = () => {
             <th>Day chg.</th>
           </tr>
 
-          {holdings.map((stock, index) => {
+          {allHoldings.map((stock, index) => {
             const curValue = stock.price * stock.qty;
             const isProfit = curValue - stock.avg * stock.qty >= 0.0;
             const profClass = isProfit ? "profit" : "loss";
@@ -107,5 +107,5 @@ const Holdings = () => {
     </>
   );
 };
-  
+
 export default Holdings;
