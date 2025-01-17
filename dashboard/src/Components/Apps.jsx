@@ -1,15 +1,13 @@
-import React from 'react';
+import React from "react";
+import { GeneralContextProvider } from "./GeneralContext"; // Your GeneralContextProvider
+import Orders from "./Orders";
 
-
-function Apps() {
-
+function App() {
   return (
-    <>
-      <div>
-        <h1>Apps</h1>
-      </div>
-    </>
-  )
+    <GeneralContextProvider>
+      <Orders />
+    </GeneralContextProvider>
+  );
 }
 
-export default Apps
+export default App;

@@ -74,3 +74,6 @@ step 12:
         Fetch the data from database to dashboard
                 -> Install axios which help us to connect with the api
                         -> npm i axios
+
+step 12:
+        Add some functionality on buy and sell button

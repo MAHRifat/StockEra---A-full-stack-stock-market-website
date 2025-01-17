@@ -1,6 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState,useContext} from 'react';
 
 import {Tooltip, Grow} from "@mui/material";
+
+import GeneralContext from "./GeneralContext";
 
 import {watchlist} from "../data/data";
 
@@ -70,13 +72,24 @@ const WatchListItem = ({stock}) => {
 }
 
 const WatchListActions = ({uid}) => {
+
+    const generalContext = useContext(GeneralContext);
+
+    const handleBuyClick = () => {
+        generalContext.openBuyWindow(uid);
+    };
+    const handleSellClick = () => {
+        console.log(uid);
+        generalContext.openSellWindow(uid);
+    };
+
     return (
         <span className='actions'>
             <span className='' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '.25rem' }}>
-                <Tooltip title="Buy (B)" placement='top' arrow>
+                <Tooltip title="Buy (B)" placement='top' arrow onClick={handleBuyClick}>
                     <button className='buy'>Buy</button>
                 </Tooltip>
-                <Tooltip title="Sell (S)" placement='top' arrow>
+                <Tooltip title="Sell (S)" placement='top' arrow onClick={handleSellClick}>
                     <button className='sell'>Sell</button>
                 </Tooltip>
                 <Tooltip title="Analytics (A)" placement='top' arrow>

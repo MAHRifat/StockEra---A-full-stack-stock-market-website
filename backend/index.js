@@ -5,8 +5,9 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-const {HoldingsModel} = require("./model/HoldingsModel");
-const {PositionsModel} = require("./model/PositionsModel");
+const { HoldingsModel } = require("./model/HoldingsModel");
+const { PositionsModel } = require("./model/PositionsModel");
+const { OrdersModel } = require("./model/OrdersModel");
 
 const PORT = process.env.PORT || 3002;
 const uri = process.env.MONGO_URL;
@@ -189,17 +190,103 @@ app.use(bodyParser.json());
 //     res.send("Done");
 // });
 
-app.get('/allHoldings', async(req, res)=>{
+app.get('/allHoldings', async (req, res) => {
     let allHoldings = await HoldingsModel.find({});
     res.json(allHoldings);
 });
 
-app.get('/allPositions', async(req, res)=>{
+app.get('/allPositions', async (req, res) => {
     let allPositions = await PositionsModel.find({});
     res.json(allPositions);
 });
 
-app.listen(PORT, ()=>{
+app.get("/allOrders", async (req, res) => {
+    let allOrders = await OrdersModel.find({});
+    res.json(allOrders);
+});
+
+app.post("/newOrder", async (req, res) => {
+    let newOrder = new OrdersModel({
+        name: req.body.name,
+        qty: req.body.qty,
+        price: req.body.price,
+        mode: req.body.mode,
+    });
+
+    if(newOrder.qty <= 0){
+        res.send("order cancel due to qty less then 1");
+    }
+    else{
+        newOrder.save();
+        res.send('Order saved');
+    }
+});
+
+app.post("/updateOrder", async (req, res) => {
+    const { name, qty, price } = req.body;
+  
+    try {
+      // Use async/await to handle the update
+      const updatedStock = await OrdersModel.findOneAndUpdate(
+        { name: name },         // Filter
+        { qty: qty, price: price }, // Update
+        { new: true }           // Options: return the updated document
+      );
+  
+      if (!updatedStock) {
+        return res.status(404).send("Stock not found");
+      }
+        res.send(updatedStock);
+      
+    } catch (err) {
+      console.error("Error updating stock:", err);
+      res.status(500).send("Error updating stock");
+    }
+  });
+  
+  
+
+  app.post("/sellStock", async (req, res) => {
+    const { name, qty } = req.body;
+
+    try {
+        // Validate quantity
+        if (qty <= 0) {
+            return res.status(400).json({ message: "Invalid quantity. Quantity must be greater than 0" });
+        }
+
+        // Find the stock by name
+        const stock = await OrdersModel.findOne({ name });
+
+        if (!stock) {
+            return res.status(404).json({ message: "Stock not found" });
+        }
+
+        if (stock.qty < qty) {
+            return res.status(400).json({ message: "Insufficient stock quantity" });
+        }
+
+        // Calculate the updated quantity
+        const updatedQty = stock.qty - qty;
+
+        if (updatedQty === 0) {
+            // Delete the stock if the quantity becomes 0
+            await OrdersModel.deleteOne({ name });
+        } else {
+            // Update the stock's quantity
+            stock.qty = updatedQty;
+            await stock.save();
+        }
+
+        res.status(200).json({ message: "Stock sold successfully" });
+    } catch (error) {
+        console.error("Error processing sell stock request:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+
+app.listen(PORT, () => {
     mongoose.connect(uri);
     console.log("app started!");
 });
