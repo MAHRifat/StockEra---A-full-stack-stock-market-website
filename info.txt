@@ -75,5 +75,9 @@ step 12:
                 -> Install axios which help us to connect with the api
                         -> npm i axios
 
-step 12:
+step 13:
         Add some functionality on buy and sell button
+
+step 14:
+        Authantication and Authorization
+        email verificaition and many more 

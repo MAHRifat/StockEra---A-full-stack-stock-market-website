@@ -11,6 +11,11 @@ import AboutPage from './landing_page/about/AboutPage';
 import Navbar from './landing_page/Navbar';
 import Footer from './landing_page/Footer';
 import NotFound from './landing_page/NotFound';
+import Login from './landing_page/login/Login';
+
+import "react-toastify/dist/ReactToastify.css";
+import VerifyEmail from './landing_page/signup/VerifyEmail';
+
 
 
 createRoot(document.getElementById('root')).render(
@@ -20,6 +25,8 @@ createRoot(document.getElementById('root')).render(
       <Route path='/' element={<HomePage/>}></Route>
       <Route path='/pricing' element={<PricingPage/>}></Route>
       <Route path='/signup' element={<Signup/>}></Route>
+      <Route path='/verify-email' element={<VerifyEmail/>}></Route>
+      <Route path='/login' element={<Login/>} ></Route>
       <Route path='/product' element={<ProductPage/>}></Route>
       <Route path='/support' element={<SupportPage/>}></Route>
       <Route path='/about' element={<AboutPage/>}></Route>

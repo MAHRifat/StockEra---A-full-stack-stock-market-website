@@ -1,21 +1,66 @@
-require('dotenv').config();
-
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 const { HoldingsModel } = require("./model/HoldingsModel");
 const { PositionsModel } = require("./model/PositionsModel");
 const { OrdersModel } = require("./model/OrdersModel");
+const authRoute = require("./Routes/AuthRoute");
+const UserModel = require("./model/UserModel");
 
 const PORT = process.env.PORT || 3002;
 const uri = process.env.MONGO_URL;
+require('dotenv').config();
 
 const app = express();
 
-app.use(cors());
+
+
+
+// app.use(cors());
+app.use(cors({
+    origin: ["http://localhost:5173", "http://localhost:5174"], // Frontend 1 and Frontend 2 origins
+    credentials: true,
+}));
 app.use(bodyParser.json());
+app.use(cookieParser());
+
+
+app.use("/", authRoute);
+
+app.get('/allUsers', async (req, res) => {
+    let allUsers = await UserModel.find({});
+    res.json(allUsers);
+});
+
+
+app.post('/verify-email', async (req, res) => {
+    const { email, verificationCode } = req.body;
+
+    console.log("Received email:", email);
+    console.log("Received verification code:", verificationCode);
+
+    const user = await UserModel.findOne({ email });
+    if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+    }
+
+    console.log(user.verificationCode);
+
+    if (user.verificationCode == verificationCode) {
+        user.isVerified = true;
+        user.verificationCode = null; // Clear the code after verification
+        await user.save();
+
+        res.status(200).json({ success: true, message: 'Email verified successfully' });
+    } else {
+        res.status(400).json({ message: 'Invalid verification code' });
+    }
+});
+
+
 
 
 // app.get("/addHoldings", async(req, res)=>{
@@ -213,10 +258,10 @@ app.post("/newOrder", async (req, res) => {
         mode: req.body.mode,
     });
 
-    if(newOrder.qty <= 0){
+    if (newOrder.qty <= 0) {
         res.send("order cancel due to qty less then 1");
     }
-    else{
+    else {
         newOrder.save();
         res.send('Order saved');
     }
@@ -224,29 +269,29 @@ app.post("/newOrder", async (req, res) => {
 
 app.post("/updateOrder", async (req, res) => {
     const { name, qty, price } = req.body;
-  
-    try {
-      // Use async/await to handle the update
-      const updatedStock = await OrdersModel.findOneAndUpdate(
-        { name: name },         // Filter
-        { qty: qty, price: price }, // Update
-        { new: true }           // Options: return the updated document
-      );
-  
-      if (!updatedStock) {
-        return res.status(404).send("Stock not found");
-      }
-        res.send(updatedStock);
-      
-    } catch (err) {
-      console.error("Error updating stock:", err);
-      res.status(500).send("Error updating stock");
-    }
-  });
-  
-  
 
-  app.post("/sellStock", async (req, res) => {
+    try {
+        // Use async/await to handle the update
+        const updatedStock = await OrdersModel.findOneAndUpdate(
+            { name: name },         // Filter
+            { qty: qty, price: price }, // Update
+            { new: true }           // Options: return the updated document
+        );
+
+        if (!updatedStock) {
+            return res.status(404).send("Stock not found");
+        }
+        res.send(updatedStock);
+
+    } catch (err) {
+        console.error("Error updating stock:", err);
+        res.status(500).send("Error updating stock");
+    }
+});
+
+
+
+app.post("/sellStock", async (req, res) => {
     const { name, qty } = req.body;
 
     try {
