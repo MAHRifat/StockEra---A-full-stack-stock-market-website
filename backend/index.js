@@ -9,6 +9,7 @@ const { PositionsModel } = require("./model/PositionsModel");
 const { OrdersModel } = require("./model/OrdersModel");
 const authRoute = require("./Routes/AuthRoute");
 const UserModel = require("./model/UserModel");
+const jwt = require("jsonwebtoken");
 
 const PORT = process.env.PORT || 3002;
 const uri = process.env.MONGO_URL;
@@ -20,12 +21,10 @@ const app = express();
 
 
 // app.use(cors());
-app.use(cors({
-    origin: ["http://localhost:5173", "http://localhost:5174"], // Frontend 1 and Frontend 2 origins
-    credentials: true,
-}));
+app.use(cors());
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(express.json());
 
 
 app.use("/", authRoute);
@@ -59,6 +58,25 @@ app.post('/verify-email', async (req, res) => {
         res.status(400).json({ message: 'Invalid verification code' });
     }
 });
+
+
+app.post("/api/verify-cookie", (req, res) => {
+    const { token } = req.cookies;
+    console.log("token: " + token);
+    console.log("token key: " + process.env.TOKEN_KEY);
+    if (!token) {
+        return res.status(401).json({ status: false, message: "No token provided" });
+    }
+
+    try {
+        const user = jwt.verify(token, process.env.TOKEN_KEY);
+        console.log(user);
+        res.json({ status: true, user }); // Send the decoded user info
+    } catch (err) {
+        res.status(401).json({ status: false, message: "Invalid token" });
+    }
+});
+
 
 
 
@@ -333,7 +351,7 @@ app.post("/sellStock", async (req, res) => {
 
 app.listen(PORT, () => {
     mongoose.connect(uri);
-    console.log("app started!");
+    console.log(`app started! ${PORT}`);
 });
 
 

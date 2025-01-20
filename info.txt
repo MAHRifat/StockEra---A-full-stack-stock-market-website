@@ -81,3 +81,8 @@ step 13:
 step 14:
         Authantication and Authorization
         email verificaition and many more 
+
+step 15:
+        add Charts 
+                -> npm install --save chart.js react-chartjs-2
+                -> https://react-chartjs-2.js.org/examples/ 

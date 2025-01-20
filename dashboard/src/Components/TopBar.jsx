@@ -2,7 +2,8 @@ import React from "react";
 
 import Menu from "./Menu";
 
-const TopBar = () => {
+const TopBar = ({user}) => {
+  console.log("User in TopBar:", user);
   return (
     <div className="topbar-container">
       <div className="indices-container">
@@ -18,7 +19,7 @@ const TopBar = () => {
         </div>
       </div>
 
-      <Menu />
+      <Menu user={user}/>
     </div>
   );
 };

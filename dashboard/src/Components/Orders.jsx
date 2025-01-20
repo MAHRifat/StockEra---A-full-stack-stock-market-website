@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom"; // You can still use this for navigation if needed
 import axios from "axios";
 import GeneralContext from "./GeneralContext";
+import { Doughnut_Chart } from "./Doughnut_Chart";
 
 const Orders = () => {
   const [allOrders, setAllOrders] = useState([]);
@@ -26,8 +27,39 @@ const Orders = () => {
     generalContext.openSellWindow(uid); // Make sure the openSellWindow function is working
   };
 
+
+const data = {
+  labels: allOrders.map((subArray) => subArray["name"]),
+  datasets: [
+    {
+      label: 'Total Price',
+      data: allOrders.map((stock)=> (stock.price* stock.qty)),
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.5)',
+        'rgba(54, 162, 235, 0.5)',
+        'rgba(255, 206, 86, 0.5)',
+        'rgba(75, 192, 192, 0.5)',
+        'rgba(153, 102, 255, 0.5)',
+        'rgba(255, 159, 64, 0.5)',
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+      ],
+      borderWidth: 1,
+    },
+  ],
+};
+
+
+
   return (
-    <div className="orders">
+    <>
+      <div className="orders">
       {allOrders.length > 0 && (
         <div>
           <h3 className="title">Orders ({allOrders.length})</h3>
@@ -73,7 +105,10 @@ const Orders = () => {
           </Link>
         </div>
       )}
+      <br /><br /><br /><br /><br />
+      <Doughnut_Chart data={data}/>
     </div>
+    </>
   );
 };
 

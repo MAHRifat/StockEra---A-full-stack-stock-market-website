@@ -20,7 +20,6 @@ function Login() {
         });
 
     const handleLogin = async (e) => {
-        console.log(email, password);
         e.preventDefault();
         try {
             const { data } = await axios.post(
@@ -29,9 +28,9 @@ function Login() {
                 { withCredentials: true }
             );
 
-            console.log(email);
 
-            const { message, success, verified } = data;
+            const { message, success, verified, user } = data;
+            console.log(user);
 
             if (success) {
                 console.log("Login successful:", data);
@@ -39,7 +38,7 @@ function Login() {
                 setTimeout(() => {
                     // navigate("/");
                     window.location.href = "http://localhost:5174";
-                }, 1000);
+                }, 5000);
             } else if (verified == false) {
                 setTimeout(() => {
                     navigate("/verify-email", { state: { email } });
