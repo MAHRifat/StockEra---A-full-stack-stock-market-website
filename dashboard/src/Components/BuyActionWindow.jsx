@@ -14,10 +14,11 @@ const BuyActionWindow = ({ uid }) => {
   const [avgPrice, setAvgPrice] = useState(0);
   const [stock, setStock] = useState(null);
   const [popupMessage, setPopupMessage] = useState("");
+  const { closeBuyWindow } = React.useContext(GeneralContext);
 
   // Fetch all orders when component mounts
   useEffect(() => {
-    axios.get("http://localhost:3002/allOrders").then((res) => {
+    axios.get("https://stockera-backend.onrender.com/allOrders").then((res) => {
       setAllOrders(res.data);
     });
   }, []);
@@ -31,49 +32,54 @@ const BuyActionWindow = ({ uid }) => {
   }, [allOrders, uid]); // Re-run this when allOrders or uid changes
 
   const handleBuyClick = () => {
-    if (stock) {
-      // Calculate new quantity and new average price based on existing stock
-      const newQty = stock.qty + parseInt(stockQuantity);
-      const newAvgPrice = ((stock.qty * stock.price) + (stockPrice * stockQuantity)) / newQty;
-  
-      // Update stock in the database
-      axios.post("http://localhost:3002/updateOrder", {
-        name: uid,
-        qty: newQty,
-        price: newAvgPrice,
-      })
-        .then((response) => {
-          console.log("Stock updated successfully:", response.data);
-          setAvgPrice(newAvgPrice);
+    console.log("Stock:", stock);
+    console.log("Stock Quantity:", stockQuantity);
+    console.log("Stock Price:", stockPrice);
+    const quantity = parseInt(stockQuantity, 10);
+  const price = parseFloat(stockPrice);
+  if (stock) {
+    const newQty = stock.qty + quantity;
+    const newAvgPrice = ((stock.qty * stock.price) + (price * quantity)) / newQty;
+    
+    // Update stock in the database
+    axios.post("https://stockera-backend.onrender.com/updateOrder", {
+      name: uid,
+      qty: parseInt(newQty, 10),
+      price: parseFloat(newAvgPrice),
+    })
+    .then((response) => {
+      console.log("Stock updated successfully:", response.data);
+        setAvgPrice(newAvgPrice);
           setAllOrders(response.data); // Optionally update allOrders in state if needed
+          closeBuyWindow();
         })
         .catch((error) => {
           console.error("Error updating stock:", error);
         });
     } else {
       // If stock does not exist yet, create a new order in the database
-      axios.post("http://localhost:3002/newOrder", {
+      axios.post("https://stockera-backend.onrender.com/newOrder", {
         name: uid,
-        qty: stockQuantity,
-        price: stockPrice,
+        qty: parseInt(stockQuantity, 10),
+        price: parseFloat(stockPrice),
         mode: "BUY",
-      })
+    })
       .then((response) => {
         console.log("New stock order placed:", response.data);
         // Update state to reflect the new stock
         setAllOrders(response.data);
       })
       .catch((error) => {
-        console.error("Error placing new stock order:", error);
+        console.error("Error placing new stock order:", error.response?.data || error);
       });
     }
   
     // Close the buy window after performing the operation
-    GeneralContext.closeBuyWindow();
+    closeBuyWindow();
   };
   
   const handleCancelClick = () => {
-    GeneralContext.closeBuyWindow();
+      closeBuyWindow();
   };
 
   return (

@@ -18,7 +18,7 @@ export const GeneralContextProvider = (props) => {
   const [allOrders, setAllOrders] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3002/allOrders").then((res) => {
+    axios.get("https://stockera-backend.onrender.com/allOrders").then((res) => {
       setAllOrders(res.data);
     });
   }, []);

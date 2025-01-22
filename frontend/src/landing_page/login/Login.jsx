@@ -23,7 +23,7 @@ function Login() {
         e.preventDefault();
         try {
             const { data } = await axios.post(
-                "http://localhost:3002/login",
+                "https://stockera-backend.onrender.com/login",
                 { email, password },
                 { withCredentials: true }
             );
@@ -37,7 +37,9 @@ function Login() {
                 handleSuccess(message);
                 setTimeout(() => {
                     // navigate("/");
-                    window.location.href = "http://localhost:5174";
+                    window.location.href = "https://stockera-dashboard.web.app";
+                    // navigate("https://stockera-dashboard.web.app");
+
                 }, 5000);
             } else if (verified == false) {
                 setTimeout(() => {

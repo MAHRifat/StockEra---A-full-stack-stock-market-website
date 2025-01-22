@@ -32,6 +32,7 @@ module.exports.Signup = async (req, res, next) => {
     const { email, password, username, createdAt } = req.body;
     const verificationCode = generateVerificationCode();
     const existingUser = await User.findOne({ email });
+    console.log(existingUser);
     if (existingUser) {
       console.log(existingUser.isVerified);
       if (existingUser.isVerified) {
@@ -90,6 +91,8 @@ module.exports.Login = async (req, res, next) => {
     res.cookie("token", token, {
       withCredentials: true,
       httpOnly: false,
+      secure: true,
+      sameSite: 'None',
     });
     res.status(201).json({ 
       message: "User logged in successfully", 

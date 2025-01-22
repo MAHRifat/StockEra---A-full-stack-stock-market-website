@@ -33,7 +33,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:3002/newUser",
+        "https://stockera-backend.onrender.com/newUser",
         {
           ...inputValue,
         },
@@ -61,7 +61,8 @@ const Signup = () => {
         handleError(message);
       }
     } catch (error) {
-      console.log(error);
+      handleError("route not working");
+      console.log(error + " fuck");
     }
     setInputValue({
       ...inputValue,

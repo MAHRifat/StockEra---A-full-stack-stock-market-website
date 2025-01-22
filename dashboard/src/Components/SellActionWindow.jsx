@@ -35,7 +35,7 @@ const SellActionWindow = ({ uid, closeSellWindow, allOrders }) => {
     }
 
     axios
-      .post("http://localhost:3002/sellStock", {
+      .post("https://stockera-backend.onrender.com/sellStock", {
         name: uid,
         qty: stockQuantity,
       })

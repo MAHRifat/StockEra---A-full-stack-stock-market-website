@@ -15,70 +15,62 @@ const Home = () => {
   const [username, setUsername] = useState("");
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (user) {
-      setUsername(user.name);  // Or use any other user property you need
-    } else {
-      // window.location.href = "http://localhost:5173/login";  // Redirect if no user is found
-    }
-  }, []);
-
-  useEffect(() => {
     const verifyCookie = async () => {
       if (!cookies.token) {
         removeCookie("token");
-        window.location.href = "http://localhost:5173/login";
+        window.location.href = "https://stockera-2bc33.web.app/login";
         return;
       }
-  
+
       try {
         const { data } = await axios.post(
-          "http://localhost:3002/api/verify-cookie",
+          "https://stockera-backend.onrender.com/api/verify-cookie",
           {},
           { withCredentials: true }
         );
         const { status, user } = data;
-  
+        console.log(user);
+
         if (status) {
           // Check if the toast has already been shown
           const hasShownToast = localStorage.getItem("hasShownToast");
-  
+
           if (!hasShownToast) {
             toast(`Hello ${user.username}`, {
               toastId: "user-welcome",
               position: "top-right",
             });
-  
+
             // Mark the toast as shown
             localStorage.setItem("hasShownToast", "true");
           }
-  
+
           setUsername(user.username); // Set username for display
         } else {
           removeCookie("token");
-          window.location.href = "http://localhost:5173/login";
+          window.location.href = "https://stockera-2bc33.web.app/login";
         }
       } catch (err) {
         console.error("Error verifying cookie:", err);
       }
     };
-  
+
     verifyCookie();
   }, [cookies, navigate, removeCookie]);
 
-  
+
   const Logout = () => {
     removeCookie("token");
     // navigate("/signup");
-    window.location.href = "http://localhost:5173/login";
+    window.location.href = "https://stockera-2bc33.web.app/login";
   };
 
 
   return (
     <>
-      <TopBar user={username}/>
+      <TopBar user={username} />
       <Dashboard />
-      <ToastContainer/>
+      <ToastContainer />
     </>
   );
 };

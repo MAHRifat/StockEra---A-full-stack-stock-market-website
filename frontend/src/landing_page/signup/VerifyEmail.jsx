@@ -31,7 +31,7 @@ const VerifyEmail = () => {
     const handleVerify = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.post("http://localhost:3002/verify-email", {
+            const { data } = await axios.post("https://stockera-backend.onrender.com/verify-email", {
                 email,
                 verificationCode,
             });
